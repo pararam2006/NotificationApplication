@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         //создание уведомления
         val notif = NotificationCompat.Builder(this,CHANNEL_ID)
-            .setContentTitle("Уведомление")
-            .setContentText("Если пришло, значит работает")
+            .setContentTitle("Ты это видишь?")
+            .setContentText("Да? Значит работает")
             .setSmallIcon(R.drawable.baseline_info_24)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
@@ -58,21 +58,10 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                 var requestPermissionLauncher =
-                     registerForActivityResult(
-                        ActivityResultContracts.RequestPermission()
-                    ) { isGranted : Boolean ->
-                        if (isGranted) {
-                            Log.i("Permission :", "Granted")
-                            Toast.makeText(this, "Разрешение получено", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Log.i("Permission :", "Denied")
-                            Toast.makeText(this, "Разрешение отклонено", Toast.LENGTH_SHORT).show()
-                        }
 
-                    }
             }
             notifyManager.notify(NOTIF_ID,notif)
+            Toast.makeText(this, "Вам пришло уведомление", Toast.LENGTH_SHORT).show()
         }
     }
 
